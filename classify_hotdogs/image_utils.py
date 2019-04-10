@@ -11,4 +11,17 @@ class ImageUtils:
     image_dim = 224
     white = np.array([255, 255, 255])
 
-    return np.reshape().padToSquare(white)
+    (height, width, _) = img.shape
+
+    if (height < image_dim and width < image_dim):
+      return img
+
+    # ensure one side is of length 224
+    scale_factor = image_dim / (height if height > width else width)
+    new_width = int(width * scale_factor)
+    new_height = int(height * scale_factor)
+    dim = (new_width, new_height)
+
+    resized = cv2.resize(img, dim, cv2.INTER_AREA)
+
+    return resized
