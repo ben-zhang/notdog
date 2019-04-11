@@ -29,4 +29,4 @@ def classify_img(neural_net, image_path):
 
   resized = resize_img(img)
 
-  inputBlob = 
+  inputBlob =   
