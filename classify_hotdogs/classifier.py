@@ -33,7 +33,7 @@ class Classifier:
     resized = ImageUtils.resize_img(img)
 
     blob = cv2.dnn.blobFromImage(resized, 1, (224, 224), (0,0,0))
-    net.setInput(input_blob)
+    net.setInput(blob)
 
     # Since the net is pretrained, we forward pass for confidence intervals
     predictions = net.forward()
@@ -41,10 +41,15 @@ class Classifier:
     # !!!!! debug
     print(predictions)
 
-    # Get the indices of the 3 best predictions
-    n_best = np.argsort(predictions[0])[::-1][:3]
+    # Get the indices of the 2 best predictions
+    n_best = np.argsort(predictions[0])[::-1][:2]
 
     for (i, label) in enumerate(n_best):
       is_hotdog_str= "Hotdog" if class_names[label] == "hotdog" else "Not Hotdog"
 
       img_text = "{}, {:.2f}%".format(is_hotdog_str, predictions[0][label] * 100)
+
+      cv2.putText(img, img_text, (5,  380 + 25 * i),  cv2.FONT_HERSHEY_SIMPLEX,
+			0.7, (0, 0, 0), 2)
+
+    return img
