@@ -38,18 +38,15 @@ class Classifier:
     # Since the net is pretrained, we forward pass for confidence intervals
     predictions = net.forward()
 
-    # !!!!! debug
-    print(predictions)
-
     # Get the indices of the 2 best predictions
-    n_best = np.argsort(predictions[0])[::-1][:2]
+    n_best = np.argsort(predictions[0])[::-1][:1]
 
     for (i, label) in enumerate(n_best):
       is_hotdog_str= "Hotdog" if class_names[label] == "hotdog" else "Not Hotdog"
 
-      img_text = "{}, {:.2f}%".format(is_hotdog_str, predictions[0][label] * 100)
+      img_text = "{}".format(is_hotdog_str)
 
-      cv2.putText(img, img_text, (5,  380 + 25 * i),  cv2.FONT_HERSHEY_SIMPLEX,
+      cv2.putText(img, img_text, (5,  380),  cv2.FONT_HERSHEY_SIMPLEX,
 			0.7, (0, 0, 0), 2)
 
     return img
