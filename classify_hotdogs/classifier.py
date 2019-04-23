@@ -31,6 +31,14 @@ class Classifier:
     min_confidence = 0.05
     net, class_names = neural_net
     resized = ImageUtils.resize_img(img)
+    
+    resizedWithText = resized.copy()
+
+    # cv2.putText(resizedWithText, "Resized Image", (5,  200),  cv2.FONT_HERSHEY_SIMPLEX,
+		# 	0.7, (0, 0, 0), 2)
+
+    cv2.imshow("Resized", resizedWithText)
+    cv2.waitKey(0)
 
     blob = cv2.dnn.blobFromImage(resized, 1, (224, 224), (0,0,0))
     net.setInput(blob)
@@ -46,7 +54,7 @@ class Classifier:
 
       img_text = "{}".format(is_hotdog_str)
 
-      cv2.putText(img, img_text, (5,  380),  cv2.FONT_HERSHEY_SIMPLEX,
+      cv2.putText(img, img_text, (5,  20),  cv2.FONT_HERSHEY_SIMPLEX,
 			0.7, (0, 0, 0), 2)
 
     return img
