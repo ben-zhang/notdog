@@ -34,8 +34,8 @@ class Classifier:
     
     resizedWithText = resized.copy()
 
-    # cv2.putText(resizedWithText, "Resized Image", (5,  200),  cv2.FONT_HERSHEY_SIMPLEX,
-		# 	0.7, (0, 0, 0), 2)
+    cv2.putText(resizedWithText, "Resized Image", (5,  200),  cv2.FONT_HERSHEY_SIMPLEX,
+			0.7, (0, 0, 0), 2)
 
     cv2.imshow("Resized", resizedWithText)
     cv2.waitKey(0)
